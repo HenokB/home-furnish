@@ -1,10 +1,10 @@
-# [RoomGPT](https://Design with GPT) - redesign your room with AI
+# [RoomGPT](https://Home Furnish) - redesign your room with AI
 
-This is the previous and open source version of Design with GPT (a paid SaaS product). It's the very first version of roomGPT without the auth, payments, or additional features and it's simple to clone, deploy, and play around with.
+This is the previous and open source version of Home Furnish (a paid SaaS product). It's the very first version of roomGPT without the auth, payments, or additional features and it's simple to clone, deploy, and play around with.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Nutlope/roomGPT&env=REPLICATE_API_KEY&project-name=room-GPT&repo-name=roomGPT)
 
-[![Room GPT](./public/screenshot.png)](https://Design with GPT)
+[![Room GPT](./public/screenshot.png)](https://Home Furnish)
 
 ## How it works
 

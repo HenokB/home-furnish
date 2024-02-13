@@ -7,7 +7,7 @@ export default function Header() {
       <Link href="/" className="flex space-x-2">
         
         <h1 className="sm:text-3xl text-xl font-bold ml-2 tracking-tight">
-          Design with GPT
+          Home Furnish
         </h1>
       </Link>
       {/* <a
