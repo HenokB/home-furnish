@@ -22,7 +22,7 @@ export default function HomePage() {
           Home Decor and Furnishing {" "}
           <span className="relative whitespace-nowrap text-green-600">
             <SquigglyLines />
-            <span className="relative">using AI</span>
+            <span className="relative"></span>
           </span>{" "}
           
         </h1>
