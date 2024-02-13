@@ -38,13 +38,14 @@ export async function POST(request: Request) {
   const safeTheme = theme || 'default theme'; // Replace 'default theme' with a sensible default
   const safeRoom = room || 'default room';
 
+    
 
   // POST request to Replicate to start the image restoration generation process
   let startResponse = await fetch("https://api.replicate.com/v1/predictions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + process.env.REPLICATE_API_KEY,
+      Authorization: "r8_aoLR0LXl8JU1MzAglkIxU8nKQKtGm194N3JLm", // Replace YOUR_API_KEY_HERE with your actual API key
     },
     body: JSON.stringify({
       version: "854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b",
