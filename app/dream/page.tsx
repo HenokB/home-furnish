@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { UrlBuilder } from "@bytescale/sdk";
 import { UploadWidgetConfig } from "@bytescale/upload-widget";
 import { UploadDropzone } from "@bytescale/upload-widget-react";
@@ -42,6 +42,10 @@ const options: UploadWidgetConfig = {
 };
 
 export default function DreamPage() {
+  //const [selectedFurniture, setSelectedFurniture] = useState([]);
+  const [selectedFurniture, setSelectedFurniture] = useState<string[]>([]);
+
+
   const [originalPhoto, setOriginalPhoto] = useState<string | null>(null);
   const [restoredImage, setRestoredImage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -52,7 +56,17 @@ export default function DreamPage() {
   const [theme, setTheme] = useState<themeType>("Modern");
   const [room, setRoom] = useState<roomType>("Living Room");
   const [homeSize, setHomeSize] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  
+  const [furnitureInput, setFurnitureInput] = useState('');
 
+
+
+  const handleFurnitureChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    // Explicitly assert the type of options within the mapping function
+    const selectedOptions = Array.from(event.target.selectedOptions, (option: HTMLOptionElement) => option.value);
+    setSelectedFurniture(selectedOptions);
+};
 
   const UploadDropZone = () => (
     <UploadDropzone
@@ -87,7 +101,7 @@ export default function DreamPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ imageUrl: fileUrl, theme, room }),
+      body: JSON.stringify({ imageUrl: fileUrl, theme, room, furnitureItems: furnitureInput }),
     });
 
     let newPhoto = await res.json();
@@ -106,7 +120,7 @@ export default function DreamPage() {
       <Header />
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-4 sm:mb-0 mb-8">
         <h1 className="mx-auto max-w-4xl font-display text-4xl font-bold tracking-normal text-slate-100 sm:text-6xl mb-5">
-          Generate your <span className="text-blue-600">dream</span> room
+          Generate your <span className="text-green-600">dream</span> room
         </h1>
         <ResizablePanel>
           <AnimatePresence mode="wait">
@@ -116,7 +130,7 @@ export default function DreamPage() {
                   <div className="space-y-4 w-full max-w-sm">
                   <div className="space-y-4 w-full max-w-sm">
                     <div className="flex mt-6 items-center space-x-3">
-                      <Image src="/number-2-white.svg" width={30} height={30} alt="2 icon" />
+                      <Image src="/number-1-white.svg" width={30} height={30} alt="2 icon" />
                       <p className="text-left font-medium">Enter your home size (e.g., 12ft by 12ft).</p>
                     </div>
                     <input
@@ -148,10 +162,29 @@ export default function DreamPage() {
                       themes={themes}
                     />
                   </div>
+                  
+                      <div className="mt-6 w-full max-w-sm">
+                        <div className="flex items-center space-x-3">
+                          <Image src="/number-1-white.svg" width={30} height={30} alt="4 icon" />
+                          <p className="text-left font-medium">
+                            List furniture items you're interested in.
+                          </p>
+                        </div>
+                        <textarea
+                          value={selectedFurniture}
+                          onChange={(e) => setSelectedFurniture(e.target.value.split(','))}
+                          placeholder="Enter furniture items separated by commas (e.g., couch, table, lamp)"
+                          className="mt-2 text-black border border-gray-300 rounded-lg py-2 px-4 block w-full leading-normal"
+                          style={{ height: "100px", overflowY: "auto" }}
+                        />
+                      </div>
+
+
+
                   <div className="space-y-4 w-full max-w-sm">
                     <div className="flex mt-10 items-center space-x-3">
                       <Image
-                        src="/number-2-white.svg"
+                        src="/number-1-white.svg"
                         width={30}
                         height={30}
                         alt="1 icon"

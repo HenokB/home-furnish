@@ -34,10 +34,14 @@ export async function POST(request: Request) {
     }
   }
 
-  const { imageUrl, theme, room } = await request.json();
+  const { imageUrl, theme, room, furnitureItems } = await request.json(); // Add `furnitureItems` to the destructured properties
+  
+
+  //const { imageUrl, theme, room } = await request.json();
   const safeTheme = theme || 'default theme'; // Replace 'default theme' with a sensible default
   const safeRoom = room || 'default room';
 
+  
   
   // POST request to Replicate to start the image restoration generation process
   let startResponse = await fetch("https://api.replicate.com/v1/predictions", {
